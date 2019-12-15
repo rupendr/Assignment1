@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags  %}
+
+{% block body %}
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+{% if message %}
+ <script>
+ Swal.fire({
+    icon: 'success',
+    title: '',
+    text: '{{message}}',
+
+ })
+ </script>
+{% endif %}
+  
+
+  
+
+
+<table class="table table-striped" >
+    <thead class="thead-dark" style="background-color:aliceblue" class="text-warning">
+      <tr class="text-warning">
+        <th scope="col">Vehicle Number</th>
+        <th scope="col">Vehicle Insurance </th>
+        <th scope="col">Create Date </th>
+        <th scope="col">last Modify date</th>
+
+
+
+        
+        <th scope="col">Operations</th>
+      </tr>
+    </thead>
+
+    <tbody style="background-color:aliceblue">
+         {% for vehicle in data  %}   
+        
+    
+      <tr>
+        <td >{{vehicle.vehicle_number}}</td>
+        <td> {{ vehicle.vehicle_insurance}}</td> 
+        <td> {{ vehicle.created_at}}</td> 
+        <td> {{ vehicle.updated_at}}</td> 
+
+
+
+
+        
+        <td ><a href="{% url 'delete' pk=vehicle.pk %}"> 
+
+          <center>
+              <button  >
+                                
+                <span class="badge badge-light">Delete
+              </button>
+            </center>
+            </a> 
+          
+          
+          <a href="{% url 'update' pk=vehicle.pk %}">
+
+            <center>
+                <button  >
+                                  
+                  <span class="badge badge-light">  Edit
+                </button>
+              </center>
+              </a> </td>
+              
+      </tr>
+      
+    </tbody>
+    <br>
+    {% endfor %}
+
+   
+
+  </table>
+  {% endblock body %}
